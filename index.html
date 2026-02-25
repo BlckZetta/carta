@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
 
+<style>
+:root{
+  --bg:#FFF8E7;
+  --paper:#F3E9DC;
+  --lines:#C08552;
+  --heart:#B30E0E;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  height:100vh;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family: Helvetica, Arial, sans-serif;
+  color:#7B5E47; /* café */
+}
+
+/* SOBRE */
+.envelope-wrapper{
+  position:relative;
+  width:420px;
+  height:260px;
+  perspective:1200px;
+  transition:.6s;
+  z-index:5;
+}
+
+.sobre{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+}
+
+.cuerpo{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:var(--paper);
+  border:3px solid var(--lines);
+  border-radius:12px;
+  box-shadow:0 25px 45px rgba(0,0,0,0.15);
+}
+
+.cuerpo::after{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:2px dashed var(--lines);
+  border-radius:8px;
+}
+
+.lado-derecho,
+.lado-izquierdo{
+  position:absolute;
+  inset:0;
+  background:var(--paper);
+}
+
+.lado-derecho{ clip-path:polygon(100% 0, 0 100%, 100% 100%); }
+.lado-izquierdo{ clip-path:polygon(0 0, 0 100%, 100% 100%); }
+
+.tapa{
+  position:absolute;
+  top:0;
+  left:0;
+  border-left:210px solid transparent;
+  border-right:210px solid transparent;
+  border-top:150px solid var(--lines);
+  transform-origin:top center;
+  transition:transform .5s cubic-bezier(.7,0,.3,1);
+  z-index:5;
+}
+
+.abierto .tapa{ transform:rotateX(-150deg); }
+
+.corazon{
+  position:absolute;
+  width:34px;
+  height:34px;
+  background:var(--heart);
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(45deg);
+  cursor:pointer;
+  z-index:10;
+}
+
+.corazon::before,
+.corazon::after{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:34px;
+  background:var(--heart);
+  border-radius:50%;
+}
+
+.corazon::before{ top:-17px; }
+.corazon::after{ left:-17px; }
+
+/* CARTA */
+.letter-wrapper{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:40px 0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .8s;
+  overflow-y:auto;
+  z-index:10;
+}
+  
+.paper{
+  color:#7B5E47;
+}
+  
+.paper{
+  width:500px;
+  min-height:80vh;
+  background:var(--paper);
+  padding:60px;
+  border-radius:6px;
+  box-shadow:0 30px 70px rgba(0,0,0,.2);
+  transform:translateY(200%) scale(.6);
+  transition:1s cubic-bezier(.77,0,.18,1);
+  position:relative;
+}
+
+.paper::after{
+  content:"";
+  position:absolute;
+  inset:20px;
+  border:2px dashed var(--lines);
+  border-radius:12px;
+}
+
+.show-letter{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.show-letter .paper{
+  transform:translateY(0) scale(1);
+}
+
+.hide-envelope{
+  transform:scale(.3) translateY(-200px);
+  opacity:0;
+  transition:.8s;
+}
+
+/* IMÁGENES SUAVES FIJAS */
+.floating-images{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+.side-photo{
+  position:absolute;
+  width:140px;
+  height:85px;
+  object-fit:cover;
+  border-radius:40px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:scale(.8);
+  transition:all 1s ease;
+}
+
+/* POSICIONES COMO TU IMAGEN */
+.top-left{ top:8%; left:12%; }
+.top-right{ top:8%; right:12%; }
+.middle-left{ top:45%; left:6%; transform:translateY(-50%) scale(.8); }
+.bottom-left{ bottom:8%; left:12%; }
+.bottom-right{ bottom:8%; right:12%; }
+
+.side-photo.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="envelope-wrapper" id="envelopeWrapper">
+  <div class="sobre" id="sobre">
+    <div class="cuerpo"></div>
+    <div class="lado-derecho"></div>
+    <div class="lado-izquierdo"></div>
+    <div class="tapa"></div>
+    <div class="corazon"></div>
+  </div>
+</div>
+
+<div class="letter-wrapper" id="letterWrapper">
+  <div class="paper">
+    <h1>Para mi niña❤️</h1>
+    <p>
+      Te amo, no se como empezar esto, pero te amo y demasiado, gracias por estar conmigo, gracias por ser la mejor mujer, gracias por ser mi todo, te amo y valoro tanto el que estes conmigo, me encantas y demasiado, siempre te amare y siempre estaré para ti mi amor, eres la mujer mas hermosa, mas bella, mas bonita y no puedo estar mas agradecido con Dios por permitirme estar contigo por que me hizo conocer a la mujer de mis sueños, te amo y me encanta he me has hecho vivir tantas cosas bonitas y tantas cosas que jamas pensé que me gustaran, se que no soy el hombre mas preparado pero hago mi mayor esfuerzo para serlo por ti y por esa bebe tan preciosa, las amo a las dos y no pienso en nada mas que en ser el mejor hombre para ustedes, todavía me queda mucho por vivir pero quisiera vivirlo contigo, eres el amor de mi vida y eso no tengo ninguna duda, me encanta abrazarte, darte la mano, mirarte, escuchar tu dulce voz, amarte, no hay algo que se le compare a lo bien que me siento estando a tu lado, yo se que han pasado cosas que pudieron hacer que se rompiera esto pero si no se ha roto es porque Dios tiene grandes cosas para nosotros, prometo estar aquí hasta que mi cuerpo ya no pueda mas y estaré apoyándote en las buenas en las malas, porque te amo y siempre lo haré por que no hay otra cosa mejor que pueda hacer que no sea amarte, eres mi pensamiento desde que amanece y hasta que me duermo, te amo demasiado, yo se que siempre te lo digo y a lo mejor piensas que es costumbre pero jamas será por eso, es porque de verdad lo siento y demasiado y cada día crece mas y mas y mas, amo literal todo de ti, desde tu forma de hablar, tus gestos, tus caricias, tus palabras, tus ojos, tus orejas, tu cabello, tu piel, tus hermosos labios, tu nariz, tus cachetes, tus manos, tus brazos, tu espalda, tus piernas, tus pies, tus dedos, tus lunares, tu sonrisa, tu risa, tu manera de sacar la lengüita, tus uñas, tus cejas, la manera en que caminas, tu manera en que te enojas, tus berrinches, tus cariños, todo absolutamente todo de ti amo, gracias por todo y por seguir conmigo babe.
+
+Te amo babe❤️
+    </p>
+  </div>
+</div>
+
+<!-- 5 IMÁGENES EN POSICIONES FIJAS -->
+<div class="floating-images">
+  <img src="img/foto1.jpg" class="side-photo top-left">
+  <img src="img/foto2.jpg" class="side-photo top-right">
+  <img src="img/foto3.jpg" class="side-photo middle-left">
+  <img src="img/foto4.jpg" class="side-photo bottom-left">
+  <img src="img/foto5.jpg" class="side-photo bottom-right">
+</div>
+
+<script>
+const sobre = document.getElementById("sobre");
+const letterWrapper = document.getElementById("letterWrapper");
+const envelopeWrapper = document.getElementById("envelopeWrapper");
+const sidePhotos = document.querySelectorAll(".side-photo");
+
+let open = false;
+
+sobre.addEventListener("click",()=>{
+  if(open) return;
+  open = true;
+  sobre.classList.add("abierto");
+
+  setTimeout(()=>{
+    envelopeWrapper.classList.add("hide-envelope");
+    letterWrapper.classList.add("show-letter");
+    sidePhotos.forEach(photo => photo.classList.add("show"));
+  },500);
+});
+
+letterWrapper.addEventListener("click",()=>{
+  if(!open) return;
+  open = false;
+  letterWrapper.classList.remove("show-letter");
+  envelopeWrapper.classList.remove("hide-envelope");
+  sobre.classList.remove("abierto");
+  sidePhotos.forEach(photo => photo.classList.remove("show"));
+});
+</script>
+
+</body>
+</html>
